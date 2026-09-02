@@ -1,5 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "actorOutputSchemaVersion": 1,
   "title": "SokoDeal Kenya Classified Listing",
   "description": "Schema for SokoDeal Kenya classified ad",
   "type": "object",
