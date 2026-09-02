@@ -1,0 +1,39 @@
+{
+  "title": "SokoDeal Kenya Classifieds Scraper Input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "category": {
+      "title": "Category",
+      "type": "string",
+      "description": "Category to scrape",
+      "enum": ["vehicles", "property", "electronics", "phones-tablets", "fashion", "home-appliances-furniture", "health-beauty", "babies-kids", "agriculture-food", "sports-art-outdoor", "pets", "services", "commercial-tools-equipment", "repair-construction", "jobs", "community", "seeking-work-cvs"],
+      "default": "vehicles",
+      "editor": "select"
+    },
+    "city": {
+      "title": "City (optional)",
+      "type": "string",
+      "description": "City to filter listings (leave empty for all Kenya)",
+      "default": "",
+      "editor": "textfield"
+    },
+    "maxResults": {
+      "title": "Max Results",
+      "type": "integer",
+      "description": "Maximum number of listings to extract",
+      "default": 50,
+      "minimum": 1,
+      "maximum": 500,
+      "editor": "number"
+    },
+    "proxyConfiguration": {
+      "title": "Proxy Configuration",
+      "type": "object",
+      "description": "Apify Proxy settings",
+      "editor": "proxy",
+      "default": {}
+    }
+  },
+  "required": []
+}

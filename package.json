@@ -1,0 +1,16 @@
+{
+  "name": "sokodeal-kenya-scraper",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Scraper for SokoDeal Kenya classifieds - vehicles, property, electronics, phones, jobs",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "dependencies": {
+    "apify": "^3.1.0",
+    "crawlee": "^3.5.0"
+  },
+  "author": "roshtarg",
+  "license": "MIT"
+}

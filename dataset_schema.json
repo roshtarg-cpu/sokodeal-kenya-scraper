@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SokoDeal Kenya Classifieds Dataset",
+  "description": "Dataset schema for SokoDeal Kenya listings",
+  "type": "array",
+  "items": {
+    "$ref": "output_schema.json"
+  }
+}
