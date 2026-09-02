@@ -10,6 +10,6 @@
     "seoDescription": "Extract Kenya classifieds: cars, property, electronics, jobs. JSON with images & prices. Compatible with Claude, ChatGPT & AI agents via Apify MCP."
   },
   "dockerfile": "./Dockerfile",
-  "input": ".actor/INPUT_SCHEMA.json",
-  "outputSchema": ".actor/output_schema.json"
+  "input": "INPUT_SCHEMA.json",
+  "outputSchema": "output_schema.json"
 }
