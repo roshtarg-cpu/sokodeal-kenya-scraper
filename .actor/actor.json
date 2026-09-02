@@ -6,8 +6,10 @@
   "description": "Extract classified listings from SokoDeal Kenya - vehicles, property, electronics, phones, fashion, jobs. Fast Cheerio-powered scraper with proxy support.",
   "categories": ["ECOMMERCE"],
   "storefront": {
-    "seoTitle": "SokoDeal Kenya Classifieds Scraper - Vehicles, Property, Jobs",
-    "seoDescription": "Extract Kenya classifieds from SokoDeal: cars, property, electronics, jobs. Structured JSON with images and prices. Compatible with Claude, ChatGPT & AI agents via Apify MCP."
+    "seoTitle": "SokoDeal Kenya Scraper - Cars, Property, Jobs",
+    "seoDescription": "Extract Kenya classifieds: cars, property, electronics, jobs. JSON with images & prices. Compatible with Claude, ChatGPT & AI agents via Apify MCP."
   },
-  "dockerfile": "./Dockerfile"
+  "dockerfile": "./Dockerfile",
+  "input": "./INPUT_SCHEMA.json",
+  "outputSchema": "./output_schema.json"
 }
