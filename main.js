@@ -12,9 +12,12 @@ const {
 } = input || {};
 
 // Build start URL
-let startUrl = `https://sokodeal.co.ke/${category}`;
-if (city) {
-    startUrl = `https://sokodeal.co.ke/${category}/${city}`;
+let startUrl = 'https://sokodeal.co.ke/';  // Homepage has premium listings
+if (category) {
+    startUrl = `https://sokodeal.co.ke/${category}`;
+    if (city) {
+        startUrl += `/${city}`;
+    }
 }
 
 const results = [];
@@ -23,6 +26,9 @@ const crawler = new CheerioCrawler({
     proxyConfiguration: proxyConfiguration?.useApifyProxy 
         ? await Actor.createProxyConfiguration(proxyConfiguration)
         : undefined,
+    
+    requestHandlerTimeoutSecs: 60,  // Increase timeout for slow pages
+    navigationTimeoutSecs: 60,
     
     async requestHandler({ $, request }) {
         console.log(`Processing: ${request.url}`);
