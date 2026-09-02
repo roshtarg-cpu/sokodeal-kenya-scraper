@@ -1,45 +1,13 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "actorOutputSchemaVersion": 1,
-  "title": "SokoDeal Kenya Classified Listing",
-  "description": "Schema for SokoDeal Kenya classified ad",
+  "title": "SokoDeal Kenya Scraper Output",
+  "description": "Classified listings from SokoDeal Kenya",
   "type": "object",
   "properties": {
-    "title": {
+    "results": {
       "type": "string",
-      "description": "Ad title/heading"
-    },
-    "price": {
-      "type": "string",
-      "description": "Listed price (e.g., 'KSh 35,000')"
-    },
-    "location": {
-      "type": "string",
-      "description": "Location/city of the listing"
-    },
-    "description": {
-      "type": "string",
-      "description": "Ad description (truncated to 200 chars)"
-    },
-    "image": {
-      "type": "string",
-      "format": "uri",
-      "description": "Main image URL"
-    },
-    "url": {
-      "type": "string",
-      "format": "uri",
-      "description": "Full URL to the listing"
-    },
-    "category": {
-      "type": "string",
-      "description": "Category slug"
-    },
-    "scrapedAt": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Timestamp when data was scraped"
+      "title": "Listings",
+      "template": "{{links.apiDefaultDatasetUrl}}/items?view=overview"
     }
-  },
-  "required": ["title", "url"]
+  }
 }
