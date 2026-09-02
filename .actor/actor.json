@@ -3,33 +3,13 @@
   "name": "sokodeal-kenya-scraper",
   "title": "SokoDeal Kenya Classifieds Scraper",
   "version": "1.0",
-  "description": "Extract classified listings from SokoDeal Kenya - vehicles, property, electronics, phones, fashion, jobs. Fast Cheerio-powered scraper with proxy support.",
+  "description": "Extract classified listings from SokoDeal Kenya - vehicles, property, electronics, phones, fashion, jobs. Fast Cheerio-powered scraper.",
   "categories": ["ECOMMERCE"],
   "storefront": {
     "seoTitle": "SokoDeal Kenya Scraper - Cars, Property, Jobs",
     "seoDescription": "Extract Kenya classifieds: cars, property, electronics, jobs. JSON with images & prices. Compatible with Claude, ChatGPT & AI agents via Apify MCP."
   },
   "dockerfile": "./Dockerfile",
-  "input": "./INPUT_SCHEMA.json",
-  "storageDataset": {
-    "actorSpecification": 1,
-    "fields": {},
-    "views": {
-      "overview": {
-        "title": "Overview",
-        "transformation": {
-          "fields": ["title", "price", "location", "url"]
-        },
-        "display": {
-          "component": "table",
-          "properties": {
-            "title": { "label": "Title", "format": "text" },
-            "price": { "label": "Price", "format": "text" },
-            "location": { "label": "Location", "format": "text" },
-            "url": { "label": "URL", "format": "link" }
-          }
-        }
-      }
-    }
-  }
+  "input": "./.actor/INPUT_SCHEMA.json",
+  "outputSchema": "./.actor/output_schema.json"
 }
