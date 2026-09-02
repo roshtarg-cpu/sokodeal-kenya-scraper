@@ -27,42 +27,53 @@ const crawler = new CheerioCrawler({
     async requestHandler({ $, request }) {
         console.log(`Processing: ${request.url}`);
         
-        // Extract listings from page
+        // Extract listings from page  
         const listings = [];
         
-        // SokoDeal uses .listing-card or similar selectors
-        $('article, [class*="listing"], [class*="item-card"], a[href*="_i"]').each((i, el) => {
+        // SokoDeal: Find all links ending with _i## pattern (listing URLs)
+        $('a[href*="_i"]').each((i, el) => {
             if (listings.length >= maxResults) return false;
             
-            const $el = $(el);
-            const $link = $el.is('a') ? $el : $el.find('a').first();
-            
+            const $link = $(el);
             const url = $link.attr('href');
-            if (!url || !url.includes('sokodeal.co.ke')) return;
             
-            const title = $link.text().trim() || 
-                         $el.find('[class*="title"]').first().text().trim() ||
-                         $link.attr('title') || '';
+            // Only process listing URLs (end with _i followed by numbers)
+            if (!url || !url.match(/_i\d+$/)) return;
             
-            const price = $el.find('[class*="price"]').first().text().trim() || 'Contact for price';
-            const location = $el.find('[class*="location"], [class*="city"]').first().text().trim() || '';
-            const description = $el.find('[class*="description"], p').first().text().trim().substring(0, 200) || '';
+            // Get the parent container (usually has all listing info)
+            const $parent = $link.closest('div, article, li').length > 0 
+                ? $link.closest('div, article, li') 
+                : $link.parent();
             
-            // Get image if available
-            const image = $el.find('img').first().attr('src') || '';
+            // Extract title from link text
+            const title = $link.text().trim() || $link.attr('title') || '';
+            if (!title || title.length < 3) return;  // Skip empty/short titles
             
-            if (title && url) {
-                listings.push({
-                    title,
-                    price,
-                    location,
-                    description,
-                    image: image ? (image.startsWith('http') ? image : `https://sokodeal.co.ke${image}`) : '',
-                    url: url.startsWith('http') ? url : `https://sokodeal.co.ke${url}`,
-                    category,
-                    scrapedAt: new Date().toISOString()
-                });
-            }
+            // Extract other fields from parent or siblings
+            const price = $parent.text().match(/KSh\s+[\d,]+/)?.[0] || 'Contact for price';
+            
+            // Location is usually near price in the listing
+            const textContent = $parent.text();
+            const location = textContent.split('\n').find(line => 
+                line.trim() && !line.includes('KSh') && !line.includes('ago') && line.length < 50
+            )?.trim() || '';
+            
+            // Image
+            const image = $parent.find('img').first().attr('src') || '';
+            
+            // Description (full text, then truncate)
+            const description = $parent.text().replace(/\s+/g, ' ').trim().substring(0, 200);
+            
+            listings.push({
+                title,
+                price,
+                location,
+                description,
+                image: image ? (image.startsWith('http') ? image : `https://sokodeal.co.ke${image}`) : '',
+                url: url.startsWith('http') ? url : `https://sokodeal.co.ke${url}`,
+                category,
+                scrapedAt: new Date().toISOString()
+            });
         });
         
         console.log(`Extracted ${listings.length} listings from this page`);
